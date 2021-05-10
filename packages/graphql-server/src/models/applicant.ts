@@ -13,7 +13,7 @@ export class BuyingType {
 @ObjectType()
 export class Renting {
   @Field({nullable: true})
-  moveDate?: string // date
+  moveDate?: string
   
   @Field({nullable: true})
   term?: string

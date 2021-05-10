@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server-lambda'
 import { Context } from 'apollo-server-core'
-import resolvers from './resolvers'
+import {ApplicantResolver} from './resolvers/applicants'
 import depthLimit from 'graphql-depth-limit'
 import * as Sentry from '@sentry/node'
 import DataLoader from 'dataloader'
@@ -29,12 +29,14 @@ export type ServerContext = Context<{ traceId: string; authorization: string; da
 export const graphqlHandler = async () => {
 
   const schema = await buildSchema({
-    resolvers: [class {}],
+    resolvers: [
+      ApplicantResolver,
+    ],
   });
 
   const server = new ApolloServer({
     schema,
-    resolvers,
+    resolvers: [ApplicantResolver],
     playground: true,
     introspection: true,
     formatError,
