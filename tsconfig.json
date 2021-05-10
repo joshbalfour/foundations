@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "lib": ["dom", "es2015", "es2017", "es2018", "es2019", "es2020", "es5", "es6", "es7", "esnext"],
+    "lib": ["dom", "es2015", "es2017", "es2018", "es2019", "es2020", "es5", "es6", "es7", "esnext", "ESNext.AsyncIterable"],
     "module": "es2020",
     "moduleResolution": "node",
     "noEmit": false,
@@ -18,7 +18,9 @@
     "sourceMap": true,
     "sourceRoot": "/",
     "inlineSources": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "exclude": ["public", "dist", "scripts", "node_modules", "coverage", "archive/**/*"]
 }

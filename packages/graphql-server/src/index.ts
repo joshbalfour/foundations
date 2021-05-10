@@ -1,17 +1,13 @@
 import { ApolloServer } from 'apollo-server-lambda'
-import { importSchema } from 'graphql-import'
 import { Context } from 'apollo-server-core'
-import { GraphQLError, GraphQLFormattedError } from 'graphql'
-import uuidv4 from 'uuid/v4'
 import resolvers from './resolvers'
 import depthLimit from 'graphql-depth-limit'
-import logger from './logger'
 import * as Sentry from '@sentry/node'
-import { generateConfigurationLoader } from './resolvers/configurations/dataloader'
-import { generatePropertyLoader } from './resolvers/properties/dataloader'
 import DataLoader from 'dataloader'
-import { generateOfficeLoader } from './resolvers/offices/dataloader'
-import { generateNegotiatorLoader } from './resolvers/negotiators/dataloader'
+import 'reflect-metadata'
+import {buildSchema} from 'type-graphql'
+import { handleContext } from './utils/handle.context'
+import { formatError } from './utils/format.errors'
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -30,56 +26,27 @@ export type ServerDataLoader = {
 
 export type ServerContext = Context<{ traceId: string; authorization: string; dataLoader: ServerDataLoader }>
 
-const typeDefs = importSchema('./src/schema.graphql')
+export const graphqlHandler = async () => {
 
-export const handleContext = ({ event, context }) => {
-  const reapitCustomer = event.headers['reapit-customer'] ?? 'UNKNOWN-CUSTOMER'
-  const traceId = `${reapitCustomer}-${uuidv4()}`
-  const isProductionEnv = process.env.NODE_ENV === 'production'
-  if (isProductionEnv) {
-    logger.info('handleContext', { traceId, event })
-  }
-  const newContext = {
-    traceId: traceId,
-    headers: event.headers,
-    authorization: event?.headers['reapit-connect-token'] ?? '',
-    functionName: context.functionName,
-    event,
-    context,
-  } as any
-  const dataLoader = {
-    configurationLoader: generateConfigurationLoader(newContext),
-    propertyLoader: generatePropertyLoader(newContext),
-    officeLoader: generateOfficeLoader(newContext),
-    negotiatorLoader: generateNegotiatorLoader(newContext),
-  } as ServerDataLoader
-  newContext.dataLoader = dataLoader
-  return newContext
+  const schema = await buildSchema({
+    resolvers: [class {}],
+  });
+
+  const server = new ApolloServer({
+    schema,
+    resolvers,
+    playground: true,
+    introspection: true,
+    formatError,
+    uploads: false,
+    context: handleContext,
+    validationRules: [depthLimit(10)],
+  })
+
+  return server.createHandler({
+    cors: {
+      origin: '*',
+      credentials: true,
+    },
+  })
 }
-
-export const formatError = (error: GraphQLError): GraphQLFormattedError => {
-  if (process.env.NODE_ENV === 'production') {
-    return { message: error.message, extensions: { code: error.extensions?.code } }
-  }
-  return error
-}
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  playground: true,
-  introspection: true,
-  formatError,
-  uploads: false,
-  context: handleContext,
-  validationRules: [depthLimit(10)],
-})
-
-export const graphqlHandler = server.createHandler({
-  cors: {
-    origin: '*',
-    credentials: true,
-  },
-})
-
-export default graphqlHandler
