@@ -25,6 +25,8 @@ import logger from '../../logger'
 import { URLS } from '../../constants/api'
 import { handleError } from '../../utils/handle-error'
 import { getIdFromCreateHeaders } from '../../utils/get-id-from-create-headers'
+import { ApplicantModel, PaginationModel } from '@/models'
+import { UserInputError } from 'apollo-server-errors'
 
 export const callGetApplicantByIdAPI = async (
   args: GetApplicantByIdArgs,
@@ -50,7 +52,7 @@ export const callGetApplicantByIdAPI = async (
   }
 }
 
-export const callGetApplicantsAPI = async (args: GetApplicantsArgs, context: ServerContext): GetApplicantsReturn => {
+export const callGetApplicantsAPI = async (args: GetApplicantsArgs, context: ServerContext): Promise<PaginationModel<ApplicantModel> | UserInputError> => {
   const traceId = context.traceId
   logger.info('callGetApplicantsAPI', { args, traceId })
   try {

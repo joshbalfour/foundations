@@ -5,8 +5,6 @@ import {
   CreateApplicantArgs,
   UpdateApplicantArgs,
   GetApplicantsArgs,
-  GetApplicantByIdReturn,
-  GetApplicantsReturn,
   CreateApplicantReturn,
   UpdateApplicantReturn,
   GetApplicantRelationshipsByIdArgs,
@@ -28,19 +26,20 @@ import {
   callCreateApplicantRelationshipAPI,
   callDeleteApplicantRelationshipAPI,
 } from './api'
+import { PaginationModel, ApplicantModel } from '@/models'
+import { UserInputError } from 'apollo-server-errors'
 
-export const getApplicantById = (args: GetApplicantByIdArgs, context: ServerContext): GetApplicantByIdReturn => {
+export const getApplicantById = (args: GetApplicantByIdArgs, context: ServerContext): Promise<ApplicantModel> => {
   const traceId = context.traceId
   logger.info('getApplicantById', { traceId, args })
   const applicant = callGetApplicantByIdAPI(args, context)
   return applicant
 }
 
-export const getApplicants = (args: GetApplicantsArgs, context: ServerContext): GetApplicantsReturn => {
+export const getApplicants = (args: GetApplicantsArgs, context: ServerContext): Promise<PaginationModel<ApplicantModel> | UserInputError> => {
   const traceId = context.traceId
   logger.info('getApplicants', { traceId, args })
-  const applicants = callGetApplicantsAPI(args, context)
-  return applicants
+  return callGetApplicantsAPI(args, context)
 }
 
 export const createApplicant = (args: CreateApplicantArgs, context: ServerContext): CreateApplicantReturn => {
