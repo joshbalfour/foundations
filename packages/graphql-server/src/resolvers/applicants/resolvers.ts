@@ -19,10 +19,11 @@ import {
   DeleteApplicantRelationshipArgs,
   MutationDeleteApplicantRelationshipReturn,
 } from './applicants'
-import {Query, Mutation} from 'type-graphql'
+import {Query, Mutation, Resolver} from 'type-graphql'
 import { AuthenticationError } from 'apollo-server-errors'
 import { PaginationModel, ApplicantModel } from '@/models'
 
+@Resolver()
 export class ApplicantResolver {
   @Query()
   queryGetApplicantById(
@@ -54,7 +55,6 @@ export class ApplicantResolver {
     return applicantServices.getApplicants(args, context)
   }
 }
-
 
 export const mutationCreateApplicant = (
   _: any,
