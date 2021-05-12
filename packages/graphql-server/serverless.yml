@@ -94,6 +94,10 @@ functions:
               - if-match
           authorizer:
             arn: arn:aws:cognito-idp:${self:provider.region}:${self:custom.env.AWS_ACCOUNT_ID}:userpool/${self:custom.env.COGNITO_USERPOOL_ID}
+          request:
+            parameters:
+              headers:
+                reapit-connect-token: true
       - http:
           path: graphql
           method: get
