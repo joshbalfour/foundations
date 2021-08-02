@@ -14,7 +14,3 @@ COPY . /var/task
 
 RUN ls -la
 
-RUN ["chmod", "+x", "/var/task/packages/deployment-service/container-dist/taskRunner.js"]
-RUN ["chmod", "+x", "/var/task/packages/deployment-service/container-dist/taskPopulation.js"]
-
-WORKDIR "/var/task/packages/deployment-service/dist/"

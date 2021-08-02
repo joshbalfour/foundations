@@ -471,7 +471,7 @@ functions:
     image:
       name: executable-container
       command:
-        - container-dist/taskPopulation.taskPopulation
+        - src/functions/pipeline/task-population.taskPopulation
     events:
       - sqs:
           queueName: TaskPopulation
@@ -483,7 +483,7 @@ functions:
     image:
       name: executable-container
       command:
-        - container-dist/taskRunner.taskRunner
+        - src/functions/pipeline/task-runner.taskRunner
     events:
       - sqs:
           queueName: TaskRunner
