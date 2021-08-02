@@ -37,8 +37,7 @@ provider:
   ecr:
     images:
       executable-container:
-        path: ../../
-        file: packages/deployment-service/Dockerfile
+        path: ./
   
   environment:
     NODE_ENV: 'production'
@@ -471,7 +470,7 @@ functions:
     image:
       name: executable-container
       command:
-        - src/functions/pipeline/task-population.taskPopulation
+        - src/index.taskPopulation
     events:
       - sqs:
           queueName: TaskPopulation
@@ -483,7 +482,7 @@ functions:
     image:
       name: executable-container
       command:
-        - src/functions/pipeline/task-runner.taskRunner
+        - src/index.taskRunner
     events:
       - sqs:
           queueName: TaskRunner

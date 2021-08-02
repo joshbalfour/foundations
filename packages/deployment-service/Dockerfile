@@ -1,8 +1,4 @@
-# FROM node:14
 FROM public.ecr.aws/lambda/nodejs:14
-
-ARG FUNCTION_DIR="/var/task"
-RUN mkdir -p ${FUNCTION_DIR}
 
 ## TODO modernise docker build process here
 
@@ -13,4 +9,3 @@ RUN mkdir -p ${FUNCTION_DIR}
 COPY . /var/task
 
 RUN ls -la
-
