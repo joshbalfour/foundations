@@ -20,7 +20,6 @@
     "start": "reapit-fetch-public-keys yarn build && yarn serverless offline start --runtime nodejs12.x --stage local",
     "test": "reapit-fetch-public-keys --test && echo '...skipping...'",
     "build": "echo '...skipping...'",
-    "build:container": "webpack --config webpack.container.config.js",
     "lint": "eslint --cache --ext=ts,tsx,js src --fix",
     "release": "yarn reapit-fetch-public-keys && serverless deploy",
     "publish": "echo '...skipping...'",
