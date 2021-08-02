@@ -28,3 +28,4 @@ yarn-error.log*
 public-keys.json
 
 ormconfig.json
+container-dist

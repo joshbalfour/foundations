@@ -12,21 +12,10 @@ custom:
   webpack:
     webpackConfig: 'webpack.config.js'
     includeModules: true
-    packager: 'yarn'
     packagerOptions:
       noFrozenLockFile: false
     excludeFiles: src/**/*.test.ts
     keepOutputDirectory: true
-  dynamodb:
-    stages:
-      - local
-    start:
-      port: 8000
-      inMemory: true
-      heapInitial: 200m
-      heapMax: 1g
-      migrate: true
-      convertEmptyValues: true
   serverless-offline-sqs:
     autoCreate: true
     region: eu-west-2
@@ -45,58 +34,21 @@ provider:
   s3:
     deploymentReleaseBucket:
       name: ${self:custom.env.DEPLOYMENT_BUCKET_NAME}
+  ecr:
+    images:
+      executable-container:
+        path: ../../
+        file: packages/deployment-service/Dockerfile
   
   environment:
     NODE_ENV: 'production'
     CONNECT_USER_POOL: ${self:custom.env.CONNECT_USER_POOL}
     SENTRY_DSN: ${self:custom.env.SENTRY_DSN}
-    DYNAMO_DB_REGION: ${self:custom.env.DYNAMO_DB_REGION}
-    DYNAMO_DB_ENDPOINT: ${self:custom.env.DYNAMO_DB_ENDPOINT}
-    DYNAMO_DB_PIPELINE_TABLE_NAME: ${self:custom.env.DYNAMO_DB_PIPELINE_TABLE_NAME}
-    DYNAMO_DB_PIPELINE_RUNNER_TABLE_NAME: ${self:custom.env.DYNAMO_DB_PIPELINE_RUNNER_TABLE_NAME}
-    DYNAMO_DB_TASK_TABLE_NAME: ${self:custom.env.DYNAMO_DB_TASK_TABLE_NAME}
     DEPLOYMENT_BUCKET_NAME: ${self:custom.env.DEPLOYMENT_BUCKET_NAME}
     AURORA_RESOURCE_ARN: ${self:custom.env.AURORA_RESOURCE_ARN}
     AURORA_SECRET_ARN: ${self:custom.env.AURORA_SECRET_ARN}
     AURORA_DATABASE: ${self:custom.env.AURORA_DATABASE}
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.env.AWS_ACCOUNT_ID}:table/${self:custom.env.DYNAMO_DB_PIPELINE_TABLE_NAME}'
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.env.AWS_ACCOUNT_ID}:table/${self:custom.env.DYNAMO_DB_PIPELINE_TABLE_NAME}/index/*'
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.env.AWS_ACCOUNT_ID}:table/${self:custom.env.DYNAMO_DB_PIPELINE_RUNNER_TABLE_NAME}'
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.env.AWS_ACCOUNT_ID}:table/${self:custom.env.DYNAMO_DB_PIPELINE_RUNNER_TABLE_NAME}/index/*'
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: 'arn:aws:dynamodb:${self:provider.region}:${self:custom.env.AWS_ACCOUNT_ID}:table/${self:custom.env.DYNAMO_DB_TASK_TABLE_NAME}'
     - Effect: Allow
       Action:
         - s3:PutObject
@@ -516,7 +468,10 @@ functions:
               - X-Api-Key
               - api-version
   taskPopulation:
-    handler: src/index.taskPopulation
+    image:
+      name: executable-container
+      command:
+        - container-dist/taskPopulation.taskPopulation
     events:
       - sqs:
           queueName: TaskPopulation
@@ -525,7 +480,10 @@ functions:
               - TaskPopulation
               - Arn
   taskRunner:
-    handler: src/index.taskRunner
+    image:
+      name: executable-container
+      command:
+        - container-dist/taskRunner.taskRunner
     events:
       - sqs:
           queueName: TaskRunner
