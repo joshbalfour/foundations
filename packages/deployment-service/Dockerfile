@@ -8,4 +8,10 @@ FROM public.ecr.aws/lambda/nodejs:14
 
 COPY . /var/task
 
+WORKDIR /var/task/dist/taskPopulation/src
+
 RUN ls -la
+
+CMD ["index.taskPopulation"]
+
+RUN pwd
