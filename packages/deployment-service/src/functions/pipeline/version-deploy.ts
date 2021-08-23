@@ -19,7 +19,6 @@ export const versionDeploy: SQSHandler = async (event: SQSEvent, context: Contex
 
       const deployTaskIndex = pipelineRunner.tasks?.findIndex((task) => task.functionName === 'DEPLOY')
 
-      // TODO check status
       if (deployTaskIndex === -1 || typeof deployTaskIndex === 'undefined') {
         throw new Error('No deploy task')
       }

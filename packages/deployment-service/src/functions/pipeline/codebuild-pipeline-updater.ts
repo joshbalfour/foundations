@@ -146,6 +146,8 @@ const handlePhaseChange = async ({
 
   pipelineRunner.tasks = tasks
 
+  console.log('updating pipeline runner', pipelineRunner)
+
   return savePipelineRunnerEntity(pipelineRunner)
 }
 
@@ -180,6 +182,12 @@ const handleStateChange = async ({
     )
   } else {
     pipelineRunner.buildStatus = 'IN_PROGRESS'
+    if (pipelineRunner?.pipeline?.buildStatus) {
+      pipelineRunner.pipeline.buildStatus = 'DEPLOYING'
+    }
+
+    console.log('updating state change pipeline runnner')
+
     return savePipelineRunnerEntity(pipelineRunner)
   }
 }
