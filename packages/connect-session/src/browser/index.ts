@@ -9,6 +9,8 @@ import {
 import { connectSessionVerifyDecodeIdToken } from '../utils/verify-decode-id-token'
 import decode from 'jwt-decode'
 import { DecodedToken } from '../utils'
+export * from './../types'
+export * from './../utils'
 
 export class ReapitConnectBrowserSession {
   // Static constants

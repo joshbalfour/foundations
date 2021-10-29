@@ -1,4 +1,4 @@
-import { ReapitConnectSession } from '../index'
+import { ReapitConnectSession } from '../react/index'
 import {
   ReapitConnectBrowserSessionInitializers,
   ReapitConnectServerSessionInitializers,

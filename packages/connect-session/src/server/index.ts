@@ -2,6 +2,8 @@ import axios from 'axios'
 import { CoginitoAccess, ReapitConnectServerSessionInitializers } from '../types'
 import decode from 'jwt-decode'
 import { DecodedToken } from '../utils'
+export * from './../types'
+export * from './../utils'
 
 export class ReapitConnectServerSession {
   // Static constants
