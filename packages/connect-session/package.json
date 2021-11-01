@@ -19,11 +19,6 @@
     "server",
     "src/tests/badges"
   ],
-  "main": "dist/index.js",
-  "umd:main": "dist/connect-session.umd.production.js",
-  "module": "dist/connect-session.esm.js",
-  "typings": "dist/index.d.ts",
-  "types": "dist/index.d.ts",
   "scripts": {
     "start": "echo '...skipping...'",
     "test": "cross-env TZ=UTC jest --watch --colors --silent",
