@@ -1,27 +1,30 @@
-import babel from '@rollup/plugin-babel'
-import typescript from '@rollup/plugin-typescript'
-import resolve from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import { terser } from 'rollup-plugin-terser'
+const babel = require('@rollup/plugin-babel')
+const typescript = require('@rollup/plugin-typescript')
+const resolve = require('@rollup/plugin-node-resolve')
+const commonjs = require('@rollup/plugin-commonjs')
+const { terser } = require('rollup-plugin-terser')
+const { rollup } = require('rollup')
+const { execSync } = require('child_process')
 
-const files = ['./src/browser/index.ts', './src/react/index.ts', './src/server/index.ts']
+const folders = ['browser', 'react', 'server']
 
 const config = [
   {
+    input: './src/{folder}/index.ts',
     output: {
       dir: './dist/cjs',
       format: 'cjs',
       sourcemap: true,
     },
     plugins: [
-      resolve({
+      resolve.default({
         browser: true,
       }),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.cjs.json',
       }),
-      babel({
+      babel.default({
         presets: [
           [
             '@babel/preset-env',
@@ -42,20 +45,21 @@ const config = [
     ],
   },
   {
+    input: './src/{folder}/index.ts',
     output: {
       dir: './dist/esm',
       format: 'esm',
       sourcemap: true,
     },
     plugins: [
-      resolve({
+      resolve.default({
         browser: true,
       }),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.esm.json',
       }),
-      babel({
+      babel.default({
         presets: [
           [
             '@babel/preset-env',
@@ -74,17 +78,39 @@ const config = [
       }),
       terser(),
     ],
-  }
+  },
 ]
 
-const rollupConfig = files.reduce((rollupConfig, file) => {
+const rollupConfig = folders.reduce((rollupConfig, folderName) => {
 
-  config.map(con => ({
-    input: file,
+  rollupConfig[folderName] = config.map((con) => ({
     ...con,
-  })).forEach(con => rollupConfig.push(con))
+    input: con.input.replace('{folder}', folderName),
+    output: {
+      ...con.output,
+      dir: con.output.dir.replace('{folder}', folderName),
+    },
+  }))
 
   return rollupConfig
-}, [])
+}, {})
 
-export default rollupConfig
+console.log('config', rollupConfig.react)
+
+execSync('mkdir dist')
+
+Object.keys(rollupConfig).forEach(async (folderName) => {
+  execSync(`mkdir dist/${folderName}`)
+  const result = await Promise.all([
+    rollup(rollupConfig[folderName][0]),
+    rollup(rollupConfig[folderName][1]),
+  ])
+
+  console.log('test', rollupConfig[0].output)
+
+  await Promise.all([
+    result[0].write(rollupConfig[0].output),
+    result[1].write(rollupConfig[1].output),
+  ])
+  // TODO mv all
+})

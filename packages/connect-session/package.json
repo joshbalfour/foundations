@@ -25,7 +25,7 @@
   "scripts": {
     "start": "echo '...skipping...'",
     "test": "cross-env TZ=UTC jest --watch --colors --silent",
-    "build": "cross-env NODE_ENV=production rimraf dist && rollup -c",
+    "build": "cross-env NODE_ENV=production rimraf dist && node run-rollup.js",
     "lint": "eslint --cache --ext=ts,tsx,js src --fix",
     "release": "echo '...skipping...'",
     "publish": "yarn npm publish --access public",
@@ -62,7 +62,8 @@
     "jest": "^27.0.6",
     "jest-coverage-badges": "^1.1.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.58.3"
+    "rollup": "^2.58.3",
+    "ts-node": "^10.4.0"
   },
   "peerDependencies": {
     "react": "^17.0.2",
