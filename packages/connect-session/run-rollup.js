@@ -4,7 +4,8 @@ const resolve = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
 const { terser } = require('rollup-plugin-terser')
 const { rollup } = require('rollup')
-const { execSync } = require('child_process')
+const fs = require('fs')
+const {promisify} = require('util');
 
 const folders = ['browser', 'react', 'server']
 
@@ -95,22 +96,30 @@ const rollupConfig = folders.reduce((rollupConfig, folderName) => {
   return rollupConfig
 }, {})
 
-console.log('config', rollupConfig.react)
-
-execSync('mkdir dist')
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist')
+}
 
 Object.keys(rollupConfig).forEach(async (folderName) => {
-  execSync(`mkdir dist/${folderName}`)
+
+  if (!fs.existsSync(`dist/${folderName}`)) {
+    fs.mkdirSync(`dist/${folderName}`)
+  }
+
   const result = await Promise.all([
     rollup(rollupConfig[folderName][0]),
     rollup(rollupConfig[folderName][1]),
   ])
 
-  console.log('test', rollupConfig[0].output)
+  await Promise.all([
+    result[0].write(rollupConfig[folderName][0].output),
+    result[1].write(rollupConfig[folderName][1].output),
+  ])
 
   await Promise.all([
-    result[0].write(rollupConfig[0].output),
-    result[1].write(rollupConfig[1].output),
+    promisify(fs.rename)('dist/cjs', `dist/${folderName}/cjs`),
+    promisify(fs.rename)('dist/esm', `dist/${folderName}/esm`),
   ])
-  // TODO mv all
+
+  await promisify(fs.rename)(`dist/${folderName}`, folderName)
 })
