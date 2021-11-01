@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json'
 
 import { HelpItemList } from '../help-item-list'
 import { helpItems } from '@/components/pages/help/help'
-import { LoginIdentity } from '@reapit/connect-session'
+import { LoginIdentity } from '@reapit/connect-session/react'
 
 describe('HelpItemList', () => {
   it('should match a snapshot', () => {

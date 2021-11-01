@@ -1,5 +1,5 @@
 import { reapitConnectBrowserSession } from '@/core/connect-session'
-import { ReapitConnectSession } from '@reapit/connect-session'
+import { ReapitConnectSession } from '@reapit/connect-session/browser'
 
 export const getAccessToken = async (): Promise<string | null> => {
   const connectSession = await reapitConnectBrowserSession.connectSession()

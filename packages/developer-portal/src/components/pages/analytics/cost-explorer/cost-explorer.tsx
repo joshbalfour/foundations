@@ -5,7 +5,7 @@ import { Grid, GridItem } from '@reapit/elements-legacy'
 import ErrorBoundary from '@/components/hocs/error-boundary'
 import ServiceChart from './service-chart'
 import CostExplorer from './cost-explorer-component'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '../../../../core/connect-session'
 import { selectIsCustomer } from '../../../../selector/auth'
 

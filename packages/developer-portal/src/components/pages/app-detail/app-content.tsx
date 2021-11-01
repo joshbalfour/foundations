@@ -17,7 +17,7 @@ import {
   InstallationsTableSection,
   PermissionsSection,
 } from './app-sections'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 import { getDeveloperIdFromConnectSession } from '@/utils/session'
 import { AppDetailState } from '@/reducers/apps/app-detail'

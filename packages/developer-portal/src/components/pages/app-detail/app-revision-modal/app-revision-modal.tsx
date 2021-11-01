@@ -15,7 +15,7 @@ import AppRevisionComparison from './app-revision-comparison'
 import CallToAction from '@/components/ui/call-to-action'
 import { selectAppRevisions, selectAppRevisionDetail, selectDeclineAppRevisionLoading } from '@/selector/app-revisions'
 import { selectLoginIdentity } from '@/selector/auth'
-import { useReapitConnect, LoginIdentity } from '@reapit/connect-session'
+import { useReapitConnect, LoginIdentity } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 import { Loader } from '@reapit/elements'
 

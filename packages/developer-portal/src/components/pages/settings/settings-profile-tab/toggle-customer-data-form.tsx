@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentMemberData, selectCurrentMemberIsUpdating } from '@/selector/current-member'
 import FadeIn from '../../../../styles/fade-in'
 import { reapitConnectBrowserSession } from '../../../../core/connect-session'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { selectIsUserOrUserAdmin, selectLoginIdentity } from '../../../../selector/auth'
 
 export type ToggleCustomerDataValues = {

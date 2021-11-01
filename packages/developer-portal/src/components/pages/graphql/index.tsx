@@ -18,7 +18,7 @@ import React, { Dispatch, FC, MutableRefObject, SetStateAction, useEffect, useRe
 import { useHistory, useLocation } from 'react-router'
 import Routes from '../../../constants/routes'
 import { reapitConnectBrowserSession } from '../../../core/connect-session'
-import { useReapitConnect, ReapitConnectSession } from '@reapit/connect-session'
+import { useReapitConnect, ReapitConnectSession } from '@reapit/connect-session/react'
 import { graphQLWrapper } from './__styles__/index'
 import { GRAPHQL_CONSTANTS } from '../../../constants/graphql'
 import { openNewPage, ExternalPages, navigate } from '../../../utils/navigation'

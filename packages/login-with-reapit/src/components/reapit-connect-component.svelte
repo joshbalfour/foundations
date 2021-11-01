@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ReapitConnectBrowserSession } from '@reapit/connect-session'
+  import { ReapitConnectBrowserSession } from '@reapit/connect-session/browser'
   import { onMount } from 'svelte'
   import Logout from './logout.svelte'
   import PermissionBlock from './permission.svelte'

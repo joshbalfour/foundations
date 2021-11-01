@@ -20,7 +20,7 @@
     "public/dist/"
   ],
   "dependencies": {
-    "@reapit/connect-session": "^3.0.0",
+    "@reapit/connect-session": "^4.0.0",
     "svelte": "^3.34.0"
   },
   "devDependencies": {

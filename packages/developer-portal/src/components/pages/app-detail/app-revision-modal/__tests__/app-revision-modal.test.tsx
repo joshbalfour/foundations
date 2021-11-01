@@ -16,7 +16,7 @@ import {
   onCancelRevisionSuccess,
 } from '../app-revision-modal'
 import { appDetailDataStub } from '@/sagas/__stubs__/app-detail'
-import { LoginIdentity } from '@reapit/connect-session'
+import { LoginIdentity } from '@reapit/connect-session/react'
 import {
   fetchAppDetail,
   fetchAppRevisionDetail,

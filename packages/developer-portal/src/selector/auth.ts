@@ -1,4 +1,4 @@
-import { ReapitConnectSession, LoginIdentity } from '@reapit/connect-session'
+import { ReapitConnectSession, LoginIdentity } from '@reapit/connect-session/browser'
 
 export const COGNITO_GROUP_ADMIN_USERS_LEGACY = 'ReapitUserAdmin'
 export const COGNITO_GROUP_ADMIN_USERS = 'MarketplaceAdmin'

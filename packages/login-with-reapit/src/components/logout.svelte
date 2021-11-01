@@ -1,6 +1,6 @@
 <script lang="ts">
   import SignOutButton from './sign-out-button.svelte'
-  import { ReapitConnectBrowserSession } from '@reapit/connect-session'
+  import { ReapitConnectBrowserSession } from '@reapit/connect-session/browser'
 
   export let reapitConnectBrowserSession: ReapitConnectBrowserSession
 

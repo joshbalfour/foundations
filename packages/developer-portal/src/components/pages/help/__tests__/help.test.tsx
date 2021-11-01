@@ -13,7 +13,7 @@ import {
 import configureStore from 'redux-mock-store'
 import { HelpLinks } from '@/constants/developer-help-links'
 import appState from '@/reducers/__stubs__/app-state'
-import { LoginIdentity } from '@reapit/connect-session'
+import { LoginIdentity } from '@reapit/connect-session/react'
 
 jest.mock('../../../../scripts/chat-bot')
 
@@ -23,7 +23,7 @@ jest.mock('../../../../core/router', () => ({
   },
 }))
 
-jest.mock('@reapit/connect-session', () => ({
+jest.mock('@reapit/connect-session/react', () => ({
   useReapitConnect: jest.fn(() => ({
     connectSession: {
       loginIdentity: {

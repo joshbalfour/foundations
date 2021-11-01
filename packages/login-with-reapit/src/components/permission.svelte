@@ -1,7 +1,7 @@
 <script lang="ts">
   import { slide } from 'svelte/transition'
   import SignInButton from './sign-in-button.svelte'
-  import { ReapitConnectBrowserSession } from '@reapit/connect-session'
+  import { ReapitConnectBrowserSession } from '@reapit/connect-session/browser'
   
   let showPermissionBlock: boolean = false
   export let reapitConnectBrowserSession: ReapitConnectBrowserSession

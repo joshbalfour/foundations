@@ -1,4 +1,4 @@
-import { ReapitConnectBrowserSession } from '@reapit/connect-session'
+import { ReapitConnectBrowserSession } from '@reapit/connect-session/browser'
 
 export const API_VERSION = '2020-01-31'
 

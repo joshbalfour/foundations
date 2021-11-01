@@ -12,7 +12,7 @@ import { developerCreateSubscription, developerCreateSubscriptionClearError } fr
 import DeveloperEditionContent from './developer-edition-content'
 import SuccessContent from './success-content'
 import ErrorContent from './error-content'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 import { SetStateAction } from 'react'
 import { SubscribingState } from '../../pages/desktop/desktop'

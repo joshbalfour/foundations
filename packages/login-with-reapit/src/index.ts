@@ -1,5 +1,5 @@
 import ReapitConnectButtonComponent from './components/reapit-connect-component.svelte'
-import { ReapitConnectBrowserSession } from '@reapit/connect-session'
+import { ReapitConnectBrowserSession } from '@reapit/connect-session/browser'
 
 export interface ReapitConnectInitializers {
   connectClientId: string

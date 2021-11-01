@@ -3,7 +3,8 @@ import { History } from 'history'
 import { Route, RouteProps, useHistory } from 'react-router'
 import RouteFetcher from '../components/hocs/route-fetcher'
 import Routes from '@/constants/routes'
-import { useReapitConnect, ReapitConnectSession, LoginIdentity } from '@reapit/connect-session'
+import { ReapitConnectSession, LoginIdentity } from '@reapit/connect-session/browser'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 
 export interface PrivateRouteProps {

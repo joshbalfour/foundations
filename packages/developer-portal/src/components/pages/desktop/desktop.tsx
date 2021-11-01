@@ -40,7 +40,7 @@ import devEditionImgOne from '../../../assets/images/desktop/developer-edition/d
 import devEditionImgTwo from '../../../assets/images/desktop/developer-edition/developer-edition-02.svg'
 import devEditionImgThree from '../../../assets/images/desktop/developer-edition/developer-edition-03.svg'
 import { IFRAME_URLS } from '../../../constants/iframe-urls'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '../../../core/connect-session'
 
 export type SubscribingState = 'INITIAL' | 'SUBSCRIBE_NOW' | 'CONFIRMING'

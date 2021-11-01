@@ -7,7 +7,7 @@ import {
   getLoggedUserEmail,
 } from '../session'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
-import { ReapitConnectSession } from '@reapit/connect-session'
+import { ReapitConnectSession } from '@reapit/connect-session/browser'
 
 const mockedConnectSession = {
   accessToken: 'accessToken',

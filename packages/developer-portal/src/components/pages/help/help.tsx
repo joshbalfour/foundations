@@ -10,7 +10,7 @@ import whatNewImg from '@/assets/images/help/what-new.png'
 import HelpItemList, { HelpItem } from '@/components/ui/help-item-list'
 
 import { selectLoginIdentity } from '@/selector/auth'
-import { LoginIdentity, useReapitConnect } from '@reapit/connect-session'
+import { LoginIdentity, useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 
 export const handleReportBug = () => {

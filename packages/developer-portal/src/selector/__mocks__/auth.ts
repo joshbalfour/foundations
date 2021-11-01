@@ -1,4 +1,4 @@
-import { ReapitConnectSession } from '@reapit/connect-session'
+import { ReapitConnectSession } from '@reapit/connect-session/browser'
 
 export const auth: ReapitConnectSession = {
   accessToken: '1231231',

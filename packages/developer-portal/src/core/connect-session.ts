@@ -1,4 +1,4 @@
-import { ReapitConnectBrowserSession } from '@reapit/connect-session'
+import { ReapitConnectBrowserSession } from '@reapit/connect-session/browser'
 
 // Needs to be a singleton as the class is stateful
 export const reapitConnectBrowserSession = new ReapitConnectBrowserSession({

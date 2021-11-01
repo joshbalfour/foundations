@@ -1,4 +1,4 @@
-import { ReapitConnectSession } from '@reapit/connect-session'
+import { ReapitConnectSession } from '@reapit/connect-session/browser'
 import {
   COGNITO_GROUP_ADMIN_USERS,
   COGNITO_GROUP_ADMIN_USERS_LEGACY,

@@ -28,8 +28,11 @@ jest.mock('@/utils/cookie', () => ({
   getCookieString: jest.fn(() => 'cookie-string'),
 }))
 
-jest.mock('@reapit/connect-session', () => ({
+jest.mock('@reapit/connect-session/browser', () => ({
   ReapitConnectBrowserSession: jest.fn(),
+}))
+
+jest.mock('@reapit/connect-session/react', () => ({
   useReapitConnect: () => ({
     connectSession: {},
     connectInternalRedirect: '',
