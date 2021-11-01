@@ -1,5 +1,5 @@
 import Routes from '../../constants/routes'
-import { ReapitConnectSession } from '@reapit/connect-session'
+import { ReapitConnectSession } from '@reapit/connect-session/react'
 import { getAccess } from '../get-access'
 
 describe('getAccess', () => {

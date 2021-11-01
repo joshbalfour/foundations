@@ -8,7 +8,7 @@ import CallToAction from '../call-to-action'
 import { selectAppRevisionDetail, selectAppRevisionFormState } from '@/selector/app-revisions'
 import { validationSchemaDeclineModal as validationSchema } from './validation-schema'
 import { formFieldsDeclineModal as formFields } from './form-fields'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 
 const { rejectionReasonField } = formFields

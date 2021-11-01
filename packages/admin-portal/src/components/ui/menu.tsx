@@ -16,7 +16,7 @@ import {
 } from '@reapit/elements-legacy'
 import Routes from '../../constants/routes'
 import { Location } from 'history'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '@/core/connect-session'
 import { getAccess } from '../../utils/get-access'
 

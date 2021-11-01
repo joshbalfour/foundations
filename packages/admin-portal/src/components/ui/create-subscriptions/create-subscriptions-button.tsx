@@ -10,7 +10,7 @@ import {
   selectSubsByDeveloperId,
 } from '../../../selector/subscriptions'
 import { CreateSubscriptionModel, SubscriptionModel } from '@reapit/foundations-ts-definitions'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '../../../../../insights/src/core/connect-session'
 
 export type SubscriptionType = 'applicationListing' | 'developerRegistration' | 'developerEdition'

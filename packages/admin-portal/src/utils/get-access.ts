@@ -1,4 +1,4 @@
-import { ReapitConnectSession } from '@reapit/connect-session'
+import { ReapitConnectSession } from '@reapit/connect-session/react'
 import Routes from '../constants/routes'
 
 export interface UserAccess {

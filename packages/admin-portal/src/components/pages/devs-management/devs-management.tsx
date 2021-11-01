@@ -28,7 +28,7 @@ import DisableMemberModal from '@/components/ui/disable-member-modal'
 import SetAsAdminModal from '@/components/ui/set-as-admin-modal'
 import { FetchDeveloperMembersParams } from '@/services/developers'
 import { CreateSubscriptionsButton } from '../../ui/create-subscriptions/create-subscriptions-button'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '../../../core/connect-session'
 
 export const buildFilterValues = (queryParams: URLSearchParams): DevsManagementFilterFormValues => {

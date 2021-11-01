@@ -35,7 +35,7 @@ import { setDeleteAppInitFormState } from '@/actions/app-delete'
 import { CreateSubscriptionsButton } from '../../ui/create-subscriptions/create-subscriptions-button'
 import { AppSummaryModel } from '@reapit/foundations-ts-definitions'
 import { CheckAWSButton } from './check-aws-button'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { reapitConnectBrowserSession } from '../../../core/connect-session'
 
 export type DeleteModalData = {

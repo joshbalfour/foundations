@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Route, RouteProps, useLocation } from 'react-router'
 import RouteFetcher from '../components/hocs/route-fetcher'
 import { reapitConnectBrowserSession } from './connect-session'
-import { useReapitConnect } from '@reapit/connect-session'
+import { useReapitConnect } from '@reapit/connect-session/react'
 import { getAccess } from '../utils/get-access'
 import { FlexContainer, PersistantNotification } from '@reapit/elements'
 
