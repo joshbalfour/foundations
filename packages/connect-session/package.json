@@ -14,11 +14,12 @@
   "license": "ISC",
   "author": "",
   "files": [
+    "server",
     "react",
     "browser",
-    "server",
     "src/tests/badges"
   ],
+
   "scripts": {
     "start": "echo '...skipping...'",
     "test": "cross-env TZ=UTC jest --watch --colors --silent",
