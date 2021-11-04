@@ -7,7 +7,7 @@ const { rollup } = require('rollup')
 const fs = require('fs')
 const {promisify} = require('util');
 
-const folders = ['browser', 'react', 'server']
+const folders = ['browser', 'react', 'node']
 
 const config = [
   {
