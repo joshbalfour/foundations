@@ -14,7 +14,7 @@
   "license": "ISC",
   "author": "",
   "files": [
-    "server/",
+    "node/",
     "react/",
     "browser/",
     "src/tests/badges"
@@ -22,10 +22,11 @@
   "react": "react/index.js",
   "browser": "browser/index.js",
   "node": "node/index.js",
+  "types": "browser/cjs/types.d.ts",
   "scripts": {
     "start": "echo '...skipping...'",
     "test": "cross-env TZ=UTC jest --watch --colors --silent",
-    "build": "cross-env NODE_ENV=production rimraf server && rimraf browser && rimraf react && rimraf dist && node run-rollup.js && rimraf dist",
+    "build": "cross-env NODE_ENV=production rimraf node && rimraf browser && rimraf react && rimraf dist && node run-rollup.js && rimraf dist",
     "lint": "eslint --cache --ext=ts,tsx,js src --fix",
     "release": "echo '...skipping...'",
     "publish": "yarn npm publish --access public",
