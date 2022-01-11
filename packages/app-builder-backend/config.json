@@ -1,0 +1,11 @@
+{
+  "appEnv": "local",
+  "sentryDns": "",
+  "connectClientId": "qe2hl0f1cmr1a9eotu1dp4ror",
+  "connectUserPoolId": "eu-west-2_kiftR4qFc",
+  "connectOAuthUrl": "https://connect.dev.paas.reapit.cloud",
+  "platformApiUrl": "https://platform.dev.paas.reapit.cloud",
+  "googleAnalyticsKey": "",
+  "graphqlUri": "https://ap67fpfacb.execute-api.eu-west-2.amazonaws.com/prod/",
+  "marketplaceUrl": "https://marketplace.dev.paas.reapit.cloud/installed"
+}
