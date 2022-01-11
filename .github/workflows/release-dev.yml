@@ -28,9 +28,9 @@ jobs:
 
       - name: Build
         run: |
-          cd packages/app-builder-backend && yarn build
+          yarn changed foreach --parallel --verbose --git-range HEAD~1 run build
 
       - name: Release
         run: |
-          cd packages/app-builder-backend && yarn release
+          yarn changed foreach --parallel --verbose --git-range HEAD~1 run release
 
