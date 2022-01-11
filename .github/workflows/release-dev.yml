@@ -7,10 +7,6 @@ on:
 
 env:
   NPM_TOKEN: ${{secrets.NPM_TOKEN}}
-  AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-  AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-  AWS_REGION: ${{secrets.AWS_REGION}}
-  SENTRY_AUTH_TOKEN: ${{secrets.SENTRY_AUTH_TOKEN}}
   CI: true
 
 jobs:
@@ -30,15 +26,11 @@ jobs:
       - name: Install
         run: yarn
 
-      - name: Fetch config
-        run: |
-          yarn changed foreach --parallel --verbose --git-range HEAD~1 run conf --name development
-
       - name: Build
         run: |
-          yarn changed foreach --parallel --verbose --git-range HEAD~1 run build
+          cd packages/app-builder-backend && yarn build
 
       - name: Release
         run: |
-          yarn changed foreach --parallel --verbose --git-range HEAD~1 run release
+          cd packages/app-builder-backend && yarn release
 
