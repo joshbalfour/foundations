@@ -77,6 +77,10 @@ export const bundle = () => {
   execSync(`cp -r ${yarnRcLocation} ${tmpDir}`)
   console.log('Copied root .yarnrc.yml to tmp directory')
 
+  execSync(
+    `cd ${tmpDir} && find . -maxdepth 3 -not -path "*/node_modules" -not -path "*/.git/*" -path "*/app-builder-backend/*"`,
+  )
+
   console.log(`Running yarn in ${tmpDir}`)
   // https://github.com/yarnpkg/berry/issues/2948
   // https://github.com/renovatebot/renovate/discussions/9481?sort=old#discussioncomment-660412
