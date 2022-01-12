@@ -28,6 +28,9 @@ export const processWorkspaceDeps = ({ subdirs, outDir, packagesRoot, monorepoNa
     modulePkg.main = modulePkg.main.replace('.ts', '.js')
     const builtPkgJson = path.resolve(moduleBuildDir, 'package.json')
     fs.writeFileSync(builtPkgJson, JSON.stringify(modulePkg, null, 2))
+    console.log('written package.json', builtPkgJson)
+    console.log(fs.readFileSync(builtPkgJson, 'utf8'))
+
     console.log(`Processed ${moduleName}`)
   })
 
