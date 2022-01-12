@@ -65,9 +65,9 @@ export const bundle = () => {
   execSync(`cp ${mainPkgJsonLocation} ${tmpDir}`)
   console.log('Copied root package.json to tmp directory')
 
-  console.log('Removing deps from root package.json')
-  removeDeps(tmpDir)
-  console.log('Removed deps from root package.json')
+  console.log('Removing deps and scripts from root package.json')
+  removeDeps(tmpDir, true)
+  console.log('Removed deps and scripts from root package.json')
 
   console.log('Copying root .yarn to tmp directory')
   execSync(`cp -r ${dotYarnLocation} ${tmpDir}`)
