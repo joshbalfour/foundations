@@ -73,7 +73,9 @@ export const bundle = () => {
   execSync(`cp -r ${yarnRcLocation} ${tmpDir}`)
   console.log('Copied root .yarnrc.yml to tmp directory')
   
-  execSync(`cat ${tmpDir}/.yarnrc.yml`)
+  console.log(`Running git init in ${tmpDir}`)
+  execSync(`cd ${tmpDir} && git init`)
+  console.log(`Ran git init in ${tmpDir}`)
 
   console.log(`Running yarn in ${tmpDir}`)
   // https://github.com/yarnpkg/berry/issues/2948
