@@ -65,6 +65,10 @@ export const bundle = () => {
   execSync(`cp ${mainPkgJsonLocation} ${tmpDir}`)
   console.log('Copied root package.json to tmp directory')
 
+  console.log('Removing deps from root package.json')
+  removeDeps(tmpDir)
+  console.log('Removed deps from root package.json')
+
   console.log('Copying root .yarn to tmp directory')
   execSync(`cp -r ${dotYarnLocation} ${tmpDir}`)
   console.log('Copied root .yarn to tmp directory')
@@ -72,15 +76,11 @@ export const bundle = () => {
   console.log('Copying root .yarnrc.yml to tmp directory')
   execSync(`cp -r ${yarnRcLocation} ${tmpDir}`)
   console.log('Copied root .yarnrc.yml to tmp directory')
-  
-  console.log(`Running git init in ${tmpDir}`)
-  execSync(`cd ${tmpDir} && git init`)
-  console.log(`Ran git init in ${tmpDir}`)
 
   console.log(`Running yarn in ${tmpDir}`)
   // https://github.com/yarnpkg/berry/issues/2948
   // https://github.com/renovatebot/renovate/discussions/9481?sort=old#discussioncomment-660412
-  execSync(`cd ${tmpDir} && env && pwd && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn`)
+  execSync(`cd ${tmpDir} && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn`)
   console.log(`Ran yarn in ${tmpDir}`)
 
   console.log('Removing .yarn directory')
@@ -98,8 +98,9 @@ export const bundle = () => {
 
   console.log('Zipping bundle')
   execSync('rm -rf bundle.zip')
-  execSync(`cd ${tmpDir} && zip -q -r ${path.resolve('bundle.zip')} *`)
-  console.log('Zipped bundle')
+  execSync(`cd ${tmpDir} && zip -q -r ${path.resolve('bundle.zip')} .`)
+  console.log('Zipped bundle, size:')
+  execSync(`du -h ${path.resolve('bundle.zip')}`)
 
   console.log('Removing tmp directory')
   execSync(`rm -rf ${tmpDir}`)
