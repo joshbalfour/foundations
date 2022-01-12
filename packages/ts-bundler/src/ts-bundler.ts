@@ -72,11 +72,13 @@ export const bundle = () => {
   console.log('Copying root .yarnrc.yml to tmp directory')
   execSync(`cp -r ${yarnRcLocation} ${tmpDir}`)
   console.log('Copied root .yarnrc.yml to tmp directory')
+  
+  execSync(`cat ${tmpDir}/.yarnrc`)
 
   console.log(`Running yarn in ${tmpDir}`)
   // https://github.com/yarnpkg/berry/issues/2948
   // https://github.com/renovatebot/renovate/discussions/9481?sort=old#discussioncomment-660412
-  execSync(`cd ${tmpDir} && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn`)
+  execSync(`cd ${tmpDir} && env && pwd && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn`)
   console.log(`Ran yarn in ${tmpDir}`)
 
   console.log('Removing .yarn directory')
