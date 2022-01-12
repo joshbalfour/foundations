@@ -8,7 +8,7 @@ export const processWorkspaceDeps = ({ subdirs, tmpDir, packagesRoot, monorepoNa
 
   subdirs.forEach((moduleName) => {
     console.log(`Processing ${moduleName}`)
-    const moduleBuildDir = path.resolve(tmpDir, moduleName)
+    const moduleBuildDir = path.resolve(tmpDir, 'packages', moduleName)
     const moduleSourceDir = path.resolve(packagesRoot, moduleName)
 
     const pkgJson = path.resolve(moduleSourceDir, 'package.json')
