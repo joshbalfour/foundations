@@ -43,6 +43,10 @@ export const bundle = () => {
   const toCopy = processWorkspaceDeps(context)
   console.log(`Found ${toCopy.length} modules to copy without processing`)
 
+  console.log('catting app-builder-backend package.json 1')
+  execSync(`cd ${tmpDir} && cat ${path.resolve(packagesDir, 'app-builder-backend', 'package.json')}`)
+  console.log('catted app-builder-backend package.json 1')
+
   toCopy.forEach((moduleName) => {
     console.log(`Copying without processing ${moduleName}`)
     const moduleSourceDir = path.resolve(packagesRoot, moduleName)
@@ -56,6 +60,10 @@ export const bundle = () => {
   const yarnLockLocation = path.resolve(repoRootLocation, 'yarn.lock')
   processYarnLock(yarnLockLocation, context)
   console.log('Processed root yarn.lock to tmp directory')
+
+  console.log('catting app-builder-backend package.json 2')
+  execSync(`cd ${tmpDir} && cat ${path.resolve(packagesDir, 'app-builder-backend', 'package.json')}`)
+  console.log('catted app-builder-backend package.json 2')
 
   const dotYarnLocation = path.resolve(repoRootLocation, '.yarn')
   const mainPkgJsonLocation = path.resolve(repoRootLocation, 'package.json')
@@ -77,9 +85,9 @@ export const bundle = () => {
   execSync(`cp -r ${yarnRcLocation} ${tmpDir}`)
   console.log('Copied root .yarnrc.yml to tmp directory')
 
-  execSync(
-    `cd ${tmpDir} && find . -maxdepth 3 -not -path "*/node_modules" -not -path "*/.git/*" -path "*/app-builder-backend/*"`,
-  )
+  console.log('catting app-builder-backend package.json 3')
+  execSync(`cd ${tmpDir} && cat ${path.resolve(packagesDir, 'app-builder-backend', 'package.json')}`)
+  console.log('catted app-builder-backend package.json 3')
 
   console.log(`Running yarn in ${tmpDir}`)
   // https://github.com/yarnpkg/berry/issues/2948
